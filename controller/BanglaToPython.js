@@ -11,15 +11,23 @@ const runBanglaCode = async (req, res) => {
     const { code } = req.body;
     if (!code) return res.status(400).json({ error: "No code provided" });
 
-    // Step 1️⃣: Replace Bangla digits
     let converted = code.replace(/[০-৯]/g, (d) => banglaDigits[d]);
 
-    // Step 2️⃣: Replace simple keywords
+    // replacing based on mapping
     mapping.forEach((rule) => {
-      converted = converted.replace(rule.from, rule.to);
+      converted = converted
+        .split(/(".*?"|'.*?')/g)
+        .map((part) => {
+          if (part.startsWith('"') || part.startsWith("'")) {
+            return part;
+          }
+          return part.replace(rule.from, rule.to);
+        })
+        .join("");
     });
 
-    // Step 3️⃣: Process each line
+
+    // Process each line
     converted = converted
       .split("\n")
       .map((line) => {
@@ -35,18 +43,16 @@ const runBanglaCode = async (req, res) => {
       })
       .join("\n");
 
-    // Step 4️⃣: Handle indentation properly 🧠
+    // Handle indentation properly
     converted = converted
       .split("\n")
-      .map((l) => l.trim()) // clean up space
-      .filter(Boolean); // remove empty lines
+      .map((l) => l.trim()) 
+      .filter(Boolean); 
 
-    converted = manageIndentation(converted); 
+    converted = manageIndentation(converted);
 
-    // Step 5️⃣: Run converted Python code
     const output = await runPythonCode(converted);
 
-    // Step 6️⃣: Send response
     res.json({
       success: true,
       pythonCode: converted,
