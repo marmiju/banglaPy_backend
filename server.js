@@ -17,5 +17,5 @@ app.get('/', (req, res) => {
 app.post('/toPython',runBanglaCode)
 
 app.listen(port, () => {
-    console.log(`App running on port ${port}`);
+    console.log(`App running on port localhost:${port}`);
 });

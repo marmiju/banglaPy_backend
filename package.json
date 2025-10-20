@@ -11,9 +11,16 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marmiju/banglaPy_backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marmiju/banglaPy_backend/issues"
+  },
+  "homepage": "https://github.com/marmiju/banglaPy_backend#readme"
 }
