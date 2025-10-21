@@ -1,8 +1,8 @@
 const mapping = [
   //  Basic Python keywords
-  { from: /লিখো/g, to: "print" },
-  { from: /যদি/g, to: "if" },
-  { from: /অথবা/g, to: "elif" },
+  { from: /(লিখো|প্রিন্ট)/g, to: "print" },
+  { from: /(যদি|ইফ)/g, to: "if" },
+  { from: /(ইলইফ|অথবা)/g, to: "elif" },
   { from: /নতুবাঃ/g, to: "else:" },
   { from: /যাবত/g, to: "while" },
   { from: /জন্য/g, to: "for" },
