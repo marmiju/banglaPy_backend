@@ -3,7 +3,7 @@ const mapping = [
   { from: /(লিখো|প্রিন্ট)/g, to: "print" },
   { from: /(যদি|ইফ)/g, to: "if" },
   { from: /(ইলইফ|অথবা)/g, to: "elif" },
-  { from: /(ইলস|নতুবাঃ)/g, to: "else:" },
+  { from: /(ইলস|নতুবা)/g, to: "else" },
   { from: /(যাবত|হোয়াইল)/g, to: "while" },
   { from: /(জন্য|ফর)/g, to: "for" },
   { from: /পর্যন্ত/g, to: "in range" },
