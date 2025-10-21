@@ -15,8 +15,8 @@ const mapping = [
   { from: /।/g, to: "." },
 
   //  Boolean & None values (avoid changing inside quotes)
-  { from: /(সত্য|)/g, to: "True" },
-  { from: /(মিথ্যা|)/g, to: "False" },
+  { from: /(সত্য|ট্রু)/g, to: "True" },
+  { from: /(মিথ্যা|ফলস)/g, to: "False" },
   { from: /নাল/g, to: "None" },
 
   //  Logical operators
