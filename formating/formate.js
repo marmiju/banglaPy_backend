@@ -17,15 +17,17 @@ const mapping = [
   //  Boolean & None values (avoid changing inside quotes)
   { from: /(সত্য|ট্রু)/g, to: "True" },
   { from: /(মিথ্যা|ফলস)/g, to: "False" },
-  { from: /নাল/g, to: "None" },
+  { from: /(ফাকা|নান)/g, to: "None" },
 
   //  Logical operators
   { from: /(নইলে|ওর)/g, to: "or" },
-  { from: /(এবং|এন্ড)/g, to: "and" },
+  { from: /(এবং|এন্ড)\s+/g, to: "and" },
+  { from: /(না|নট)\s+/g, to: "not" },
 
   //  Import statements
   { from: /ইম্পোর্ট করো\s+(\w+)/g, to: "import $1" },
   { from: /থেকে ইম্পোর্ট করো\s+(\w+)\s+(\w+)/g, to: "from $1 import $2" },
+
 
   //  Miscellaneous
   { from: /ভার্সন/g, to: "version" },
@@ -38,13 +40,33 @@ const mapping = [
   { from: /(ভগ্নাংশ|ফ্লোট)/, to: "float"},
 
   // letter Case conversions
-  { from: /(ছোট হাতের|লোয়ার)/g, to: "lower()" },
-  { from: /(বড় হাতের।|আপার)/g, to: "upper()" },
+  { from: /(ছোট হাতের|লোয়ার)/g, to: "lower" },
+  { from: /(বড় হাতের|আপার)/g, to: "upper" },
 
 
+  // object oriented programming
+  { from: /(নতুন|নিউ)/g, to: "new" },
 
+  { from: /(ডেফ|ফাংশন)/g, to: "def" },
+  { from: /(শ্রেনী|ক্লাস)/g, to: "class" },
+  { from: /শুরু/g, to: "__init__" },
+
+
+  // array/list methods
+  { from: /(যুক্ত|অ্যাপেন্ড)/g, to: "append" },
+  { from: /(মুছুন|পপ)/g, to: "pop" },
+  { from: /(সাজাও|সর্ট)/g, to: "sort"},
+  { from: /(উল্টা)/g, to: "reverse"},
 
 ];
+
+// const errorMap = [
+//   { from: /SyntaxError/g, to: "তোমার কোডে সিনট্যাক্স ভুল আছে। সম্ভবত কোলন (:) মিসিং" },
+//   { from: /IndentationError/g, to: "লাইনগুলোর সামনে ঠিকভাবে স্পেস দেওয়া হয়নি" },
+//   { from: /NameError/g, to: "তুমি এমন ভেরিয়েবল ব্যবহার করেছো যেটা আগে ঘোষণা করোনি" },
+// ];
+
+
 
 const banglaDigits = {
   "০": "0",

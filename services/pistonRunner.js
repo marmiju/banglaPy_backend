@@ -10,7 +10,8 @@ async function runPythonCode(code) {
   });
 
   const result = await response.json();
-  return result.run?.output || "No output";
+  console.log("Piston API response:", result);
+  return {stdout:result.run?.stdout, stderr:result.run?.stderr}; 
 }
 
 module.exports = { runPythonCode };
