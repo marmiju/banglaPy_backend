@@ -46,10 +46,10 @@ const mapping = [
 
   // object oriented programming
   { from: /(নতুন|নিউ)/g, to: "new" },
-
   { from: /(ডেফ|ফাংশন)/g, to: "def" },
-  { from: /(শ্রেনী|ক্লাস)/g, to: "class" },
+  { from: /(শ্রেনী|ক্লাস)/g, to: "class" }, 
   { from: /শুরু/g, to: "__init__" },
+  { from: /নিজ/g, to: "self" },
 
 
   // array/list methods
