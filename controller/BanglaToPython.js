@@ -9,10 +9,10 @@ const { errorMap } = require("../formating/ErrFormate");
 
 const runBanglaCode = async (req, res) => {
   try {
-    const { code } = req.body;
+    const { code,input } = req.body;
     if (!code) return res.status(400).json({ error: "No code provided" });
 
-    // 🔹 বাংলা ডিজিট কনভার্ট
+   
     let converted = code.replace(/[০-৯]/g, (d) => banglaDigits[d]);
 
     // 🔹 Mapping replace (quotes এর ভিতর untouched)
@@ -41,7 +41,7 @@ const runBanglaCode = async (req, res) => {
 
     // converted = manageIndentation(lines);
 
-    const { stderr, stdout } = await runPythonCode(converted);
+    const { stderr, stdout } = await runPythonCode(converted,input);
 
     res.json({
       success: true,

@@ -7,10 +7,12 @@ const mapping = [
   { from: /(যাবত|হোয়াইল)/g, to: "while" },
   { from: /(জন্য|ফর)/g, to: "for" },
   { from: /পর্যন্ত/g, to: "in range" },
-  { from: /(মধ্যে|ইন)/g, to: "in" },
+  { from: /মধ্যে/g, to: "in" },
   { from: /আইটেম/g, to: "items" },
   { from: /(মান|ভ্যালু)/g, to: "values" },
 
+  // for the input
+  {from:/ইনপুট/g, to: "input" },
   { from: /ঃ/g, to: ":" },
   { from: /।/g, to: "." },
 
