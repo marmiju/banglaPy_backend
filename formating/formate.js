@@ -9,7 +9,7 @@ const mapping = [
   { from: /পর্যন্ত/g, to: "in range" },
   { from: /মধ্যে/g, to: "in" },
   { from: /আইটেম/g, to: "items" },
-  { from: /(মান|ভ্যালু)/g, to: "values" },
+  { from: /(মান|ভ্যালু)/g, to: "values"},
 
   // for the input
   {from:/ইনপুট/g, to: "input" },
@@ -23,8 +23,8 @@ const mapping = [
 
   //  Logical operators
   { from: /(নইলে|ওর)/g, to: "or" },
-  { from: /(এবং|এন্ড)\s+/g, to: "and" },
-  { from: /(না|নট)\s+/g, to: "not" },
+  { from: /(এবং|এন্ড)/g, to: "and" },
+  { from: /\s+(না|নট)\s+/g, to: " not " },
 
   //  Import statements
   { from: /ইম্পোর্ট করো\s+(\w+)/g, to: "import $1" },
@@ -37,7 +37,7 @@ const mapping = [
   { from: /টাইপ/g, to: "type" },
 
   //Type casting
-  { from: /(নাম্বার|ইন্ট)/, to: "int" },
+  { from: /(নাম্বার|ইন্ট)/g, to: "int" },
   { from: /(অক্ষর|স্ট্রিং)/, to: "str" },
   { from: /(ভগ্নাংশ|ফ্লোট)/, to: "float"},
 
@@ -58,7 +58,9 @@ const mapping = [
   { from: /(যুক্ত|অ্যাপেন্ড)/g, to: "append" },
   { from: /(মুছুন|পপ)/g, to: "pop" },
   { from: /(সাজাও|সর্ট)/g, to: "sort"},
-  { from: /(উল্টা)/g, to: "reverse"},
+  { from: /(লিস্ট)/g, to: "list"},
+  { from: /(ম্যাপ)/g, to: "map"},
+  { from: /(টুকরা)/g, to: "split"},
 
 ];
 

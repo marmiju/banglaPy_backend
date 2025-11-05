@@ -4,7 +4,6 @@ const { handleVariables } = require("../core/variables");
 const { handleLoop } = require("../core/loop");
 const { handleCondition } = require("../core/condition");
 const { runPythonCode } = require("../services/pistonRunner");
-const { manageIndentation } = require("../indentation/Indentaion");
 const { errorMap } = require("../formating/ErrFormate");
 
 const runBanglaCode = async (req, res) => {
@@ -12,10 +11,12 @@ const runBanglaCode = async (req, res) => {
     const { code,input } = req.body;
     if (!code) return res.status(400).json({ error: "No code provided" });
 
+    console.log(code)
+
    
     let converted = code.replace(/[০-৯]/g, (d) => banglaDigits[d]);
 
-    // 🔹 Mapping replace (quotes এর ভিতর untouched)
+    // Mapping replace 
     mapping.forEach((rule) => {
       converted = converted
         .split(/(".*?"|'.*?')/g)
@@ -26,7 +27,7 @@ const runBanglaCode = async (req, res) => {
         .join("");
     });
 
-    // 🔹 লাইন ধরে প্রোসেস করো (ইন্ডেন্ট মুছো না!)
+    // line corrections
     let lines = converted.split("\n");
 
     lines = lines.map((line) => {
@@ -38,16 +39,15 @@ const runBanglaCode = async (req, res) => {
       }
       return line;
     });
-
     // converted = manageIndentation(lines);
-
     const { stderr, stdout } = await runPythonCode(converted,input);
 
+    console.log(stdout)
     res.json({
       success: true,
       pythonCode: converted,
       output: stdout,
-      stderr: HandleErr(stderr.slice(50)),
+      stderr: HandleErr(stderr.includes("main.py") ? stderr.slice(stderr.indexOf("main.py")+10) : ""),
     });
   } catch (err) {
     console.error(err);
@@ -61,6 +61,7 @@ const runBanglaCode = async (req, res) => {
 const HandleErr = (err) => {
   let formatted = err;
   errorMap.forEach((rule) => {
+    console.log(rule)
     formatted = formatted.replace(rule.from, rule.to);
   });
   return formatted;
