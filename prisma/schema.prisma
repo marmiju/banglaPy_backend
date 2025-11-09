@@ -18,8 +18,10 @@ datasource db {
 
 model User {
   id Int @id @default(autoincrement())
+  googleId String @unique
+  username String 
   email String @unique
-  username String @unique
+  profile_picture String
   created_at DateTime @default(now())
 
 }
