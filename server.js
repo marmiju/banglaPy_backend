@@ -36,6 +36,9 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.get('/authentication',(req,res)=>{
+    res.send('authentication deployed')
+})
 
 // handlimg routes
 app.get('/', (req, res) => {
