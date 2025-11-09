@@ -11,7 +11,11 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL:
+  process.env.NODE_ENV === "production"
+    ? "https://bangla-py-backend.vercel.app/auth/google/callback"
+    : "http://localhost:5000/auth/google/callback",
+
     },
     (accessToken, refreshToken, profile, done) => {
       const createUser = async () => {
