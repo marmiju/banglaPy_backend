@@ -14,20 +14,24 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000', 
+    origin: [
+        'https://bangla-py.vercel.app',
+        'localhost:3000'
+    ], //update cors policy
     credentials: true,
 }));
 
 
 app.use(
+    authRoute.options,
     session({
         secret: process.env.SESSION_SECRET || '1234',
-        resave: false,             
-        saveUninitialized: false,  
+        resave: false,
+        saveUninitialized: false,
         cookie: {
             maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
             httpOnly: true,              // prevents client-side JS access
-            secure: false,              
+            secure: false,
         },
     })
 );
@@ -36,7 +40,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.get('/authentication',(req,res)=>{
+app.get('/authentication', (req, res) => {
     res.send('authentication deployed')
 })
 
