@@ -14,16 +14,18 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
+    allowedHeaders: {
+    },
     origin: [
         'https://bangla-py.vercel.app',
-        'localhost:3000'
+        'http://localhost:3000'
     ], //update cors policy
     credentials: true,
 }));
 
 
 app.use(
-    authRoute.options,
+ 
     session({
         secret: process.env.SESSION_SECRET || '1234',
         resave: false,
