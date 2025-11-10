@@ -5,11 +5,8 @@ const LogOut = (req, res) => {
         console.error("Logout error:", err);
         return res.status(500).json({ message: "Logout failed" });
       }
-
       req.session.destroy(() => {
-        const FRONTEND_URL = process.env.FRONTEND_URL;
-        res.redirect(`${process.env.FRONTEND_URL}/`)
-
+        res.status(200).json({succes:true, msg:'logout succesfull'})
       });
     });
   } catch (err) {
