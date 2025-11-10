@@ -11,32 +11,27 @@ require('dotenv').config();
 
 const port = process.env.PORT || 5000
 const app = express();
-
 app.use(express.json());
+app.set('trust proxy', 1);
+
 app.use(cors({
-    allowedHeaders: {
-    },
-    origin: [
-        'https://bangla-py.vercel.app',
-        'http://localhost:3000'
-    ], //update cors policy
-    credentials: true,
+  origin: ['https://bangla-py.vercel.app', 'http://localhost:3000'],
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || '1234',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  },
+}));
 
-app.use(
- 
-    session({
-        secret: process.env.SESSION_SECRET || '1234',
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
-            httpOnly: true,              // prevents client-side JS access
-            secure: false,
-        },
-    })
-);
 
 // initialize passport
 app.use(passport.initialize())
