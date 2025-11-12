@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const { runBanglaCode } = require('./controller/BanglaToPython');
 require('./config/passportSetUp')
 const authRoute = require('./routers/auth_routes')
 const passport = require('passport')
 const session = require('express-session');
 const { router } = require('./routers/routes');
+const { RunCode } = require('./controller/RunCode');
 
 
 // configuration
@@ -55,7 +55,7 @@ app.get('/login', (req, res) => {
 app.use('/auth', authRoute)
 app.use('/api', router )
 
-app.post('/toPython', runBanglaCode)
+
 
 app.listen(port, () => {
     console.log(`App running on port localhost:${port}`);

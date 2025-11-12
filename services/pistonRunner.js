@@ -1,6 +1,5 @@
 async function runPythonCode(code,input) {
 
-  console.log(code,input)
   const response = await fetch("https://emkc.org/api/v2/piston/execute", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -13,10 +12,7 @@ async function runPythonCode(code,input) {
   });
 
 
-  console.log(response)
-
   const result = await response.json();
-  console.log("Piston API response:", result);
   return {stdout:result.run?.stdout, stderr:result.run?.stderr}; 
 }
 

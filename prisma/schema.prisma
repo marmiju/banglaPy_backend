@@ -58,7 +58,7 @@ model Submission {
 
 model UserScore {
   id         String     @id @default(uuid())
-  userId     String
+  userId     String     @unique
   totalScore Int        @default(0)
   solvedCount Int       @default(0)
   lastUpdated DateTime  @updatedAt
