@@ -4,7 +4,9 @@ const { runBanglaCode } = require('./controller/BanglaToPython');
 require('./config/passportSetUp')
 const authRoute = require('./routers/auth_routes')
 const passport = require('passport')
-const session = require('express-session')
+const session = require('express-session');
+const { router } = require('./routers/routes');
+
 
 // configuration
 require('dotenv').config();
@@ -51,6 +53,7 @@ app.get('/login', (req, res) => {
 })
 
 app.use('/auth', authRoute)
+app.use('/api', router )
 
 app.post('/toPython', runBanglaCode)
 

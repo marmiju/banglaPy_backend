@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const { LogOut } = require('../controller/authController/Logout');
+const { isLogedIn } = require('../middleware/IsLogedIn');
 const authRoute = express.Router();
 
 // Start Google login
@@ -21,8 +22,7 @@ authRoute.get(
   }
 );
 
-authRoute.get('/me', (req, res) => {
-  if (!req.user) return res.status(401).json({ message: 'Not logged in' });
+authRoute.get('/me',isLogedIn,  (req, res) => {
   res.json(req.user);
 });
 

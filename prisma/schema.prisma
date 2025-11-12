@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  // engineType = "client"
 }
 
 datasource db {
@@ -15,10 +16,52 @@ datasource db {
 }
 
 model User {
-  id              String  @id @default(uuid())
-  googleId        String   @unique
+  id              String          @id @default(uuid())
+  googleId        String          @unique
   username        String
-  email           String   @unique
+  email           String          @unique
   profile_picture String
-  created_at      DateTime @default(now())
+  created_at      DateTime        @default(now())
+
+  // Relationships
+  submissions     Submission[]
+  scores          UserScore[]
+}
+
+model Problem {
+  id          String        @id @default(uuid())
+  title       String
+  description String
+  sampleInput String
+  sampleOutput String
+  sampleExplanation String
+  created_at  DateTime      @default(now())
+
+  // Relationships
+  submissions Submission[]
+}
+
+model Submission {
+  id          String     @id @default(uuid())
+  userId      String
+  problemId   String
+  code        String?
+  isCorrect   Boolean     @default(false)
+  score       Int         @default(0)
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+
+  // Relations
+  user        User        @relation(fields: [userId], references: [id])
+  problem     Problem     @relation(fields: [problemId], references: [id])
+}
+
+model UserScore {
+  id         String     @id @default(uuid())
+  userId     String
+  totalScore Int        @default(0)
+  solvedCount Int       @default(0)
+  lastUpdated DateTime  @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id])
 }
