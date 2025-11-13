@@ -5,7 +5,6 @@ const authRoute = require('./routers/auth_routes')
 const passport = require('passport')
 const session = require('express-session');
 const { router } = require('./routers/routes');
-const { RunCode } = require('./controller/RunCode');
 
 
 // configuration
@@ -29,10 +28,12 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    
+    // secure: process.env.NODE_ENV === 'production',
+    // sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   },
 }));
+
 
 
 // initialize passport
@@ -40,23 +41,23 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/authentication', (req, res) => {
-    res.send('authentication deployed')
+  res.send('authentication deployed')
 })
 
 // handlimg routes
 app.get('/', (req, res) => {
-    res.send('App is running!');
+  res.send('App is running!');
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + "/index.html")
+  res.sendFile(__dirname + "/index.html")
 })
 
 app.use('/auth', authRoute)
-app.use('/api', router )
+app.use('/api', router)
 
 
 
 app.listen(port, () => {
-    console.log(`App running on port localhost:${port}`);
+  console.log(`App running on port localhost:${port}`);
 });
