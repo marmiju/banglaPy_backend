@@ -8,7 +8,7 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL:
       process.env.NODE_ENV === "production"
-        ? "https://bangla-py-backend.vercel.app/auth/google/callback"
+        ? "https://banglapy-backend.onrender.com/auth/google/callback"
         : "http://localhost:5000/auth/google/callback",
   },
   async (accessToken, refreshToken, profile, done) => {

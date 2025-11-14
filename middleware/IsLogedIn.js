@@ -1,4 +1,5 @@
 const isLogedIn = (req, res, next) => {
+    console.log('session',req.session )
     
     if(!req.user){
         console.log('not loggeduser:', req.user)
