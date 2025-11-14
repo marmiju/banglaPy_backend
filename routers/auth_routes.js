@@ -15,10 +15,10 @@ authRoute.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login',session:true}),
   (req, res) => {
-    // const FRONTEND_URL = process.env.FRONTEND_URL;
+    const FRONTEND_URL = process.env.FRONTEND_URL;
 
-    res.redirect(`http://localhost:3000/profile`);
-    // res.redirect(`${FRONTEND_URL}/profile`);
+    // res.redirect(`http://localhost:3000/profile`);
+    res.redirect(`${FRONTEND_URL}/profile`);
  
   }
 );
