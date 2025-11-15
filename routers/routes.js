@@ -3,6 +3,7 @@ const { getProblems, createProblem, getProblem, deletProblem, UpdateProblem } = 
 const { isLogedIn } = require('../middleware/IsLogedIn')
 const { RunCode } = require('../controller/RunCode')
 const { submitSolution } = require('../controller/submission_controller/Submission')
+const { ranking } = require('../controller/ranking/Ranking')
 
 const router = express.Router()
 
@@ -15,6 +16,8 @@ router.get('/problems',isLogedIn, getProblems )         // get  problems
 router.get('/problem/:id', getProblem )       // get  problem
 router.delete('/problem/:id',isLogedIn, deletProblem )  //delete problem
 router.patch('/problem/:id',isLogedIn, UpdateProblem )  //update problem
+
+router.get('/ranking', ranking  )  //ranking User
 
 
 module.exports= {
