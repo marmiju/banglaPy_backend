@@ -43,6 +43,26 @@ const submitSolution = async (req, res) => {
                 userId: userId
             }
         })
+
+        const isCorrectSubmission = await prisma.submission.findMany({
+            where:{
+                userId: userId,
+                problemId: problemId,
+                isCorrect: true
+            }
+        })
+
+        if (isCorrectSubmission.length > 1) return res.json({
+            success: true,
+            pythonCode: converted,
+            isCorrect,
+            msg: 'আপনি সঠিক সমাধান দিয়েছেন!',
+            submission,
+            output: stdout,
+            stderr: HandleErr(stderr.includes("main.py") ? stderr.slice(stderr.indexOf("main.py") + 10) : ""),
+        });
+            
+
         if (existingUser) {
             await prisma.userScore.update({
                 where: { userId: userId },

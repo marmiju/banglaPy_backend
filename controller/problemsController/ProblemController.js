@@ -37,7 +37,7 @@ const getProblem = async (req, res) => {
 
     const problem = await prisma.problem.findUnique({
         where: { id: id },
-        include: { submissions: true, _count: true }
+        include: { submissions: true, _count: true, submissions:{include: {user:true}} }
     })
     return res.status(200).json({ success: true, problem })
 

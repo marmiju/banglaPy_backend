@@ -4,6 +4,10 @@ const { isLogedIn } = require('../middleware/IsLogedIn')
 const { RunCode } = require('../controller/RunCode')
 const { submitSolution } = require('../controller/submission_controller/Submission')
 const { ranking } = require('../controller/ranking/Ranking')
+const {  Create_Quiz } = require('../controller/resource_controller/Quiz')
+const { Get_resources } = require('../controller/resource_controller/Get_resources')
+const { LearnComplete } = require('../controller/resource_controller/learn_Cmplete')
+const { getbadge } = require('../controller/resource_controller/GetBadge')
 
 const router = express.Router()
 
@@ -18,6 +22,13 @@ router.delete('/problem/:id',isLogedIn, deletProblem )  //delete problem
 router.patch('/problem/:id',isLogedIn, UpdateProblem )  //update problem
 
 router.get('/ranking', ranking  )  //ranking User
+
+// resource routes can be added here
+router.get('/resoureces', Get_resources)
+router.post('/addQuiz', Create_Quiz)
+router.post('/learing',isLogedIn, LearnComplete) // complete learning
+
+router.get('/badge/:userId',getbadge)
 
 
 module.exports= {
