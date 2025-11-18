@@ -1,10 +1,12 @@
 const { PrismaClient } = require("@prisma/client");
 
-const Prisma = new PrismaClient()
+
+
+const prisma = new PrismaClient()
 
 const Get_resources = async (req, res) => {
     try {
-        const resources = await Prisma.learningResource.findMany({
+        const resources = await prisma.learningResource.findMany({
             include: { quizs: true },
             orderBy: { id: 'asc' }
         });
