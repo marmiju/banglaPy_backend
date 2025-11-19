@@ -7,7 +7,7 @@ const { ranking } = require('../controller/ranking/Ranking')
 const {  Create_Quiz } = require('../controller/resource_controller/Quiz')
 const { LearnComplete } = require('../controller/resource_controller/learn_Cmplete')
 const { getbadge } = require('../controller/resource_controller/GetBadge')
-// const { GetResources } = require('../controller/resource_controller/Get_resources')
+const { getResources } = require('../controller/resource_controller/get_resources')
 
 const router = express.Router()
 
@@ -24,7 +24,7 @@ router.patch('/problem/:id',isLogedIn, UpdateProblem )  //update problem
 router.get('/ranking', ranking  )  //ranking User
 
 // resource routes can be added here
-// router.get('/resoureces', GetResources)
+router.get('/resoureces', getResources)
 router.post('/addQuiz', Create_Quiz)
 router.post('/learing',isLogedIn, LearnComplete) // complete learning
 
