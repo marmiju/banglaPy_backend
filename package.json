@@ -12,7 +12,8 @@
     "react-icons": "^5.5.0"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "postinstall": "prisma generate"
   },
   "name": "backend",
   "version": "1.0.0",
