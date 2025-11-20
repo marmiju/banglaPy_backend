@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const { handleBadges } = require("./handleBadge");
-const { activity } = require("../submission_controller/Activity");
+const { activity } = require("../activityController/Activity");
 const prisma = new PrismaClient();
 
 /*

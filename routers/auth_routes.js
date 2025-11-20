@@ -19,7 +19,7 @@ authRoute.get(
     const FRONTEND_URL = process.env.FRONTEND_URL;
 
     // res.redirect(`http://localhost:3000/profile`);
-    res.redirect(`${FRONTEND_URL}/profile`);
+    res.redirect(`${FRONTEND_URL}`);
  
   }
 );

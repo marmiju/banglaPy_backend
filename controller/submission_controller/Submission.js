@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const { runPythonCode } = require('../../services/pistonRunner')
 const { convertedpython } = require('../../services/convertedPython')
 const { HandleErr } = require('../RunCode')
-const { activity } = require('./Activity')
+const { activity } = require('../activityController/Activity')
 
 const prisma = new PrismaClient()
 

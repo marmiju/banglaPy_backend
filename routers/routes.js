@@ -8,6 +8,8 @@ const {  Create_Quiz } = require('../controller/resource_controller/Quiz')
 const { LearnComplete } = require('../controller/resource_controller/learn_Cmplete')
 const { getbadge } = require('../controller/resource_controller/GetBadge')
 const { getResources } = require('../controller/resource_controller/get_resources')
+const { getActivities } = require('../controller/activityController/GetActivity')
+const { GetUserById } = require('../controller/User_controller/getuserById')
 
 const router = express.Router()
 
@@ -29,6 +31,10 @@ router.post('/addQuiz', Create_Quiz)
 router.post('/learing',isLogedIn, LearnComplete) // complete learning
 
 router.get('/badge/:userId',getbadge)
+router.get('/activities/:userId',getActivities)
+
+// get User by id
+router.get('/user/:userId',GetUserById)
 
 
 module.exports= {
