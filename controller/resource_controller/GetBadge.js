@@ -9,7 +9,7 @@ const getbadge = async (req, res) => {
         where: {
             userId: userId
         },
-        orderBy: { level: 'desc'},
+        orderBy: { level: 'desc' },
     })
     res.status(200).json(badges)
 }

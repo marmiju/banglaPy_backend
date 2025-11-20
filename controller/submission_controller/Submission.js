@@ -2,6 +2,7 @@ const { PrismaClient } = require('@prisma/client')
 const { runPythonCode } = require('../../services/pistonRunner')
 const { convertedpython } = require('../../services/convertedPython')
 const { HandleErr } = require('../RunCode')
+const { activity } = require('./Activity')
 
 const prisma = new PrismaClient()
 
@@ -17,6 +18,9 @@ const submitSolution = async (req, res) => {
         const output = stdout;
         console.log("Submission output:", output);
 
+        // activity
+        const act = await activity(userId)
+    
         const problem = await prisma.problem.findUnique({
             where: {
                 id: problemId,
@@ -45,7 +49,7 @@ const submitSolution = async (req, res) => {
         })
 
         const isCorrectSubmission = await prisma.submission.findMany({
-            where:{
+            where: {
                 userId: userId,
                 problemId: problemId,
                 isCorrect: true
@@ -61,7 +65,7 @@ const submitSolution = async (req, res) => {
             output: stdout,
             stderr: HandleErr(stderr.includes("main.py") ? stderr.slice(stderr.indexOf("main.py") + 10) : ""),
         });
-            
+
 
         if (existingUser) {
             await prisma.userScore.update({
@@ -82,8 +86,10 @@ const submitSolution = async (req, res) => {
             })
         }
 
+
         res.json({
             success: true,
+            act,
             pythonCode: converted,
             isCorrect,
             msg: isCorrect ? 'আপনি সঠিক সমাধান দিয়েছেন!' : 'ভুল সমাধান। আবার চেষ্টা করুন।',

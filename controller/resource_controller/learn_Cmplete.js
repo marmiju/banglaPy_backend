@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const { handleBadges } = require("./handleBadge");
+const { activity } = require("../submission_controller/Activity");
 const prisma = new PrismaClient();
 
 /*
@@ -20,6 +21,11 @@ const LearnComplete = async (req, res) => {
         }
 
         console.log("User:", user.id, "Resource:", resId);
+
+        // activity
+        {
+            user.id && await activity(user.id)
+        }
 
         // 1️⃣ --- CHECK IF ALREADY COMPLETED ---
         const existLearned = await prisma.learned.findFirst({
@@ -58,8 +64,17 @@ const LearnComplete = async (req, res) => {
         // 4️⃣ --- BADGE SYSTEM ---
         const badges = await handleBadges(user.id);
 
+        const today = new Date();
+        const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+
+
+
+
+
         return res.status(200).json({
             msg: "Learning complete",
+            activity,
             lesson: newLearn,
             score: updatedScore,
             newBadges: badges

@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const { LogOut } = require('../controller/authController/Logout');
 const { isLogedIn } = require('../middleware/IsLogedIn');
+const { GETME } = require('../controller/authController/me');
 const authRoute = express.Router();
 
 // Start Google login
@@ -23,9 +24,7 @@ authRoute.get(
   }
 );
 
-authRoute.get('/me',isLogedIn,  (req, res) => {
-  res.json(req.user);
-});
+authRoute.get('/me',isLogedIn,GETME);
 
 authRoute.get('/logout', LogOut)
 
