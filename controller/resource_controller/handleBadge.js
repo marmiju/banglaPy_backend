@@ -4,20 +4,18 @@ const prisma = new PrismaClient()
 async function handleBadges(userId) {
     let awardedBadges = [];
 
-    // total completed learning count
     const completed = await prisma.learned.count({
         where: { userId }
     });
 
-    // get existing badge names
     const userBadges = await prisma.badge.findMany({
         where: { userId }
     });
 
-    const hasBadge = (name) => userBadges.some(b => b.name === name);
+    const hasBadge = (name) => userBadges.some(b => b.name === name);  // FIXED
 
-    // 🎖 Badge 1 → First Step
-    if (completed >= 1 && !hasBadge("FIRST_STEP")) {
+    // FIRST STEP — first lesson
+    if (completed >= 0 && !hasBadge("FIRST_STEP")) {
         const badge = await prisma.badge.create({
             data: {
                 name: "FIRST_STEP",
@@ -31,7 +29,7 @@ async function handleBadges(userId) {
         awardedBadges.push(badge);
     }
 
-    // 🎖 Badge 2 → Learning Streak (5 lessons)
+    // LEARNING STREAK — 3 lessons
     if (completed >= 3 && !hasBadge("LEARNING_STREAK")) {
         const badge = await prisma.badge.create({
             data: {
@@ -46,13 +44,13 @@ async function handleBadges(userId) {
         awardedBadges.push(badge);
     }
 
-    // 🎖 Badge 3 → Master Learner (10 lessons)
-    if (completed >= 5 && !hasBadge("AVARAGE LEARNER")) {
+    // AVERAGE LEARNER — 5 lessons
+    if (completed >= 5 && !hasBadge("AVERAGE_LEARNER")) {
         const badge = await prisma.badge.create({
             data: {
-                name: "AVARAGE LEARNER",
+                name: "AVERAGE_LEARNER",
                 description: "Completed 5 lessons!",
-                iconUrl: "/badges/master.png",
+                iconUrl: "/badges/average.png",
                 category: "learning",
                 level: 3,
                 userId
@@ -60,6 +58,8 @@ async function handleBadges(userId) {
         });
         awardedBadges.push(badge);
     }
+
+    // MASTER LEARNER — 10 lessons
     if (completed >= 10 && !hasBadge("MASTER_LEARNER")) {
         const badge = await prisma.badge.create({
             data: {
@@ -76,5 +76,6 @@ async function handleBadges(userId) {
 
     return awardedBadges;
 }
+
 
 module.exports = { handleBadges }

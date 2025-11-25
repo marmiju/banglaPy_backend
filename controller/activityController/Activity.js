@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const activity = async (userId) => {
     // activity
     const today = new Date();
-    const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+    const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate() )
     console.log("today", dateOnly)
 
     const activity = await prisma.activity.upsert({

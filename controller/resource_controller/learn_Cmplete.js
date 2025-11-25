@@ -23,9 +23,8 @@ const LearnComplete = async (req, res) => {
         console.log("User:", user.id, "Resource:", resId);
 
         // activity
-        {
-            user.id && await activity(user.id)
-        }
+        const activities = await activity(user.id)
+
 
         // 1️⃣ --- CHECK IF ALREADY COMPLETED ---
         const existLearned = await prisma.learned.findFirst({
@@ -51,30 +50,32 @@ const LearnComplete = async (req, res) => {
 
         const POINT = 5;
 
-        const updatedScore = await prisma.userScore.update({
-            where: { userId: user.id },
-            data: {
-                totalScore: { increment: POINT },
+        const updatedScore = await prisma.userScore.upsert({
+            where: {
+                userId: "330319e4-d4a6-4054-a88f-f01fc1eb7ed7"
+            },
+            update: {
+                totalScore: { increment: 5 },
                 solvedCount: { increment: 1 }
+            },
+            create: {
+                userId: "330319e4-d4a6-4054-a88f-f01fc1eb7ed7",
+                totalScore: 5,
+                solvedCount: 1
             }
         });
+
 
         console.log("Score Updated:", updatedScore);
 
         // 4️⃣ --- BADGE SYSTEM ---
         const badges = await handleBadges(user.id);
-
-        const today = new Date();
-        const dateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-
-
-
-
+        console.log(badges)
 
 
         return res.status(200).json({
             msg: "Learning complete",
-            activity,
+            activities,
             lesson: newLearn,
             score: updatedScore,
             newBadges: badges

@@ -10,6 +10,9 @@ const { getbadge } = require('../controller/resource_controller/GetBadge')
 const { getResources } = require('../controller/resource_controller/get_resources')
 const { getActivities } = require('../controller/activityController/GetActivity')
 const { GetUserById } = require('../controller/User_controller/getuserById')
+const { UserScore } = require('../controller/User_controller/UserScore')
+const GetSubmission = require('../controller/submission_controller/GetSubmission')
+const { GetLearned } = require('../controller/submission_controller/GetLeanred')
 
 const router = express.Router()
 
@@ -35,7 +38,9 @@ router.get('/activities/:userId',getActivities)
 
 // get User by id
 router.get('/user/:userId',GetUserById)
-
+router.get('/user_score/:userId',UserScore)
+router.get('/submission/:userId',GetSubmission)
+router.get('/learned/:userId',GetLearned)
 
 module.exports= {
     router
