@@ -9,6 +9,9 @@ const GetSubmission = async(req,res)=>{
         const submission = await prisma.submission.findMany({
             where:{
                 userId
+            },
+            include:{
+                problem:true
             }
         })
         res.status(200).json(submission)

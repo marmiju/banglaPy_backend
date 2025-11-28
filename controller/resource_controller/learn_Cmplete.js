@@ -52,14 +52,14 @@ const LearnComplete = async (req, res) => {
 
         const updatedScore = await prisma.userScore.upsert({
             where: {
-                userId: "330319e4-d4a6-4054-a88f-f01fc1eb7ed7"
+                userId: user.id
             },
             update: {
                 totalScore: { increment: 5 },
                 solvedCount: { increment: 1 }
             },
             create: {
-                userId: "330319e4-d4a6-4054-a88f-f01fc1eb7ed7",
+                userId: user.id,
                 totalScore: 5,
                 solvedCount: 1
             }

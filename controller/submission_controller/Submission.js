@@ -60,7 +60,7 @@ const submitSolution = async (req, res) => {
             success: true,
             pythonCode: converted,
             isCorrect,
-            msg: 'আপনি সঠিক সমাধান দিয়েছেন!',
+            msg: isCorrect ?'সঠিক সমাধান!': 'ভুল সমাধান',
             submission,
             output: stdout,
             stderr: HandleErr(stderr.includes("main.py") ? stderr.slice(stderr.indexOf("main.py") + 10) : ""),
