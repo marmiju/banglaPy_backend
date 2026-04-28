@@ -29,5 +29,7 @@
   "bugs": {
     "url": "https://github.com/marmiju/banglaPy_backend/issues"
   },
-  "homepage": "https://github.com/marmiju/banglaPy_backend#readme"
+  "homepage": "https://github.com/marmiju/banglaPy_backend#readme",
+  "devDependencies": {},
+  "type": "commonjs"
 }
