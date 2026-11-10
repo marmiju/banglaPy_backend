@@ -12,12 +12,15 @@
     "react-icons": "^5.5.0"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "dev": "nodemon --exec ts-node server.ts",
+    "build": "tsc",
+    "start": "nodemon --exec ts-node server.ts",
+    "start:prod": "node dist/server.js",
     "postinstall": "prisma generate"
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "dist/server.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -30,6 +33,15 @@
     "url": "https://github.com/marmiju/banglaPy_backend/issues"
   },
   "homepage": "https://github.com/marmiju/banglaPy_backend#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
+    "@types/node": "^25.6.0",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  },
   "type": "commonjs"
 }
